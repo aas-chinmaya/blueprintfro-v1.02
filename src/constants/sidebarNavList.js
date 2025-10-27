@@ -51,12 +51,24 @@ export const fullNav = [
     icon: "Inbox",
     roles: ["cpcGroup", "employeeGroup"],
   },
-  {
-    title: "TimeSheet",
-    url: "/time-sheet",
-    icon: "Inbox",
-    roles: ["cpcGroup", "employeeGroup"],
-  },
+{
+  title: "Marketing",
+  url: "#",
+  icon: "Inbox",
+  roles: ["cpcGroup", "employeeGroup"],
+  items: [
+    { title: "Overview", url: "/marketing", roles: ["cpcGroup", "employeeGroup"] },
+    { title: "Received Contacts", url: "/marketing/contacts", roles: ["cpcGroup", "employeeGroup"] },
+    { title: "Qualified Leads", url: "/marketing/leads", roles: ["cpcGroup", "employeeGroup"] },
+  ],
+},
+
+  // {
+  //   title: "TimeSheet",
+  //   url: "/time-sheet",
+  //   icon: "Inbox",
+  //   roles: ["cpcGroup", "employeeGroup"],
+  // },
 
   {
    title: "Project Management",

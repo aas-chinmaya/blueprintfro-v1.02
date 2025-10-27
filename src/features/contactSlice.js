@@ -3,6 +3,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {axiosInstance} from '@/lib/axios';
 
+
+export const addContact = createAsyncThunk(
+  'contact/addContact',
+  async (contactData, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post('/contact/createcontact', contactData);
+
+      if (!response.data || !response.data.contact) {
+        throw new Error('Invalid response format');
+      }
+
+      return response.data.contact;
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Failed to add contact';
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
 // Thunk: Get all contacts
 export const getAllContacts = createAsyncThunk(
   'contact/getAllContacts',
@@ -89,6 +109,19 @@ const contactSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+    // Add Contact
+      .addCase(addContact.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(addContact.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.contacts.push(action.payload);
+      })
+      .addCase(addContact.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
       // Get All Contacts
       .addCase(getAllContacts.pending, (state) => {
         state.status = 'loading';
