@@ -7,7 +7,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { getAllContacts, addContact } from '@/features/contactSlice';
+import { getAllContacts, addContact } from '@/features/marketing/contactSlice';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -160,7 +160,6 @@ export default function Contact() {
     'Contact Received': contacts.filter((c) => !c.isDeleted && c.status === 'Contact Received').length,
     'Conversion Made': contacts.filter((c) => !c.isDeleted && c.status === 'Conversion Made').length,
     'Follow-up Taken': contacts.filter((c) => !c.isDeleted && c.status === 'Follow-up Taken').length,
-    'In Progress': contacts.filter((c) => !c.isDeleted && c.status === 'In Progress').length,
     Converted: contacts.filter((c) => !c.isDeleted && c.status === 'Converted').length,
     Closed: contacts.filter((c) => !c.isDeleted && c.status === 'Closed').length,
   };
